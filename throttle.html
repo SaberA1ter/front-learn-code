@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<script>
+    let throttle = (time, callback) => {
+        let timer = null
+        return (e) => {
+            if (timer) {
+                return
+            }
+            timer = setTimeout(() => {
+                callback(e)
+                clearTimeout(timer)
+                timer = null
+            }, time)
+        }
+    }
+    let body = document.body
+    body.addEventListener('mousemove', throttle(1000, e => {
+        console.log(e)
+    }))
+</script>
+</body>
+</html>

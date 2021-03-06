@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<script>
+    let debounce = (time, callback) => {
+        let timer = null
+        return () => {
+            if (timer) {
+                clearTimeout(timer)
+            }
+            timer = setTimeout(() => {
+                callback()
+                clearTimeout(timer)
+                timer = null
+            }, time)
+        }
+    }
+    let body = document.body
+    body.addEventListener('mousemove', debounce(500, () => {
+        console.log(123)
+    }))
+</script>
+</body>
+</html>
