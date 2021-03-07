@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <a href="https://www.bilibili.com/" target="_blank">哔哩哔哩干杯</a>
+</div>
+<script>
+    let divDom = document.querySelector('div')
+    let aDom = divDom.querySelector('a')
+    divDom.onclick = () => {
+        console.log('click tag div now!')
+    }
+    aDom.onclick = (event) => {
+        // 阻止事件冒泡
+        event.stopPropagation()
+        // 阻止事件默认行为
+        event.preventDefault()
+        // 当点击 a 标签时，会触发href跳转和div点击事件
+        console.log('click tag a now!')
+    }
+</script>
+</body>
+</html>
