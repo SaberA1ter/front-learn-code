@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p v-for="(value, index) in arr" :key="index">
+        {{ value }}
+    </p>
+    <hr>
+    <my-list :arr="arr"></my-list>
+    <button @click="clickBtn">修改 arr[0].a 数值</button>
+    <button @click="clickBtn1">修改 arr[0].b.c 数值</button>
+    <button @click="clickBtn2">替换整个 arr </button>
+    <button @click="clickBtn3">替换整个 arr[0] </button>
+    <button @click="redraw">强制重绘</button>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.js"></script>
+<script>
+    Vue.component('my-list', {
+        template: `
+        <div>
+          <p v-for="(value, index) in arr" :key="index">
+            {{ value }}
+          </p>
+        </div>
+        `,
+        props: {
+            arr: Array
+        }
+    })
+</script>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                arr: [
+                    {a: 1, b: {c: 1}},
+                ]
+            }
+        },
+        methods: {
+            clickBtn() {
+                this.arr[0].a += 1
+            },
+            clickBtn1() {
+                this.arr[0].b.c += 1
+            },
+            clickBtn2() {
+                this.arr = [
+                    {a: 1, b: {c: 1}},
+                ]
+            },
+            // btn3 绑定失效
+            clickBtn3() {
+                this.arr[0] = {a: 1, b: {c: 1}}
+                console.log(this.arr)
+            },
+            redraw() {
+                // $forceUpdate 无法让子组件重新渲染
+                this.$forceUpdate()
+            }
+        }
+    })
+</script>
+</body>
+</html>
