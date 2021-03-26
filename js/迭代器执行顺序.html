@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">迭代</button>
+<script>
+    window.onload = () => {
+        function* myFunction() {
+            for (let i = 0; i < 10; i++) {
+                console.log(i)
+                yield i
+                console.log(i)
+                console.log('--------------------------')
+            }
+        }
+
+        let a = myFunction()
+
+        document.getElementById('btn').onclick = function () {
+            console.log((a.next().value))
+        }
+    }
+    // 可以推断出 yield 是阻塞这个函数的执行，阻塞点为 yield 语句
+    /**
+     * {
+     *     yield 1
+     *     console.log(1)
+     *     yield 2
+     * }
+     * 若如此，则第一次执行next释放 1 ，但不会 console.log(1)
+     * 第二次执行 next 时才会执行 console.log(1)
+     */
+</script>
+</body>
+</html>
