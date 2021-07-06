@@ -16,10 +16,10 @@
     devtools.toString = function () {
         num++
         if (num > 1) {
-            msgDom.innerText = '您已打开控制台'
+            msgDom.innerText += '输出了一次 date'
         }
     }
-    // console.log 只有在用户打开控制台后才会执行
+    // devtools 在控制台打开时，会再重新执行一次引用，即 toString
     console.log(devtools)
 </script>
 </body>
